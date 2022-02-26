@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import ConnectionPopup from "./components/connection-popup";
+import ConnectionModal from "./components/connection-modal";
 
 function App() {
   const [connectionCode, setConnectionCode] = useState<string>();
+
   return (
     <Wrapper>
-      <ConnectionPopup open={!connectionCode} />
+      <ConnectionModal open={!connectionCode} />
     </Wrapper>
   );
 }

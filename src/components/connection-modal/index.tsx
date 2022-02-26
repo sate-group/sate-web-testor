@@ -7,26 +7,30 @@ import SatelliteIcon from "./satellite-icon";
 type Props = {
   open: boolean;
 };
-function ConnectionPopup(props: Props) {
+function ConnectionModal(props: Props) {
   return (
-    <Wrapper modal open={props.open}>
+    <Wrapper modal open={props.open} closeOnDocumentClick={false}>
       <div className="cover">
         <SatelliteIcon size="50%" />
         <span>Connection </span>
       </div>
-      <TextField
-        id="filled-basic"
-        label="Device Serial Code"
-        variant="filled"
-        type="text"
-      />
-      <TextField
-        id="filled-basic"
-        label="Password"
-        variant="filled"
-        type="password"
-      />
-      <Button variant="contained">Confirm</Button>
+      <form>
+        <TextField
+          id="filled-basic"
+          label="Device Serial Code"
+          variant="filled"
+          type="text"
+        />
+        <TextField
+          id="filled-basic"
+          label="Password"
+          variant="filled"
+          type="password"
+        />
+        <Button type="submit" variant="contained">
+          CONFIRM
+        </Button>
+      </form>
     </Wrapper>
   );
 }
@@ -48,6 +52,8 @@ const Wrapper = styled(Popup)`
     background-color: ${dark.backgroundRoot};
     color: ${dark.foregroundDefault};
 
+    user-select: none;
+
     .cover {
       width: 100%;
       display: flex;
@@ -58,7 +64,12 @@ const Wrapper = styled(Popup)`
 
       margin: 20px 0;
     }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
   }
 `;
 
-export default ConnectionPopup;
+export default ConnectionModal;
