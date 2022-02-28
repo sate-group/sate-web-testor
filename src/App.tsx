@@ -1,20 +1,22 @@
-import React, { useState } from "react";
 import styled from "styled-components";
-import ConnectionModal from "./components/connection-modal";
+import SignInBox from "./components/sign-in-box";
 
 function App() {
-  const [connectionCode, setConnectionCode] = useState<string>();
-
   return (
     <Wrapper>
-      <ConnectionModal open={!connectionCode} />
+      <SignInBox />
     </Wrapper>
   );
 }
 
 const Wrapper = styled.div`
-  width: 100vw;
-  height: 100vh;
+  padding: 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
 `;
 
 export default App;

@@ -2,29 +2,35 @@ import { Button, TextField } from "@mui/material";
 import { dark } from "react-colorset";
 import Popup from "reactjs-popup";
 import styled from "styled-components";
-import SatelliteIcon from "./satellite-icon";
+import SatelliteIcon from "../icons/satellite-icon";
 
 type Props = {
   open: boolean;
 };
 function ConnectionModal(props: Props) {
   return (
-    <Wrapper modal open={props.open} closeOnDocumentClick={false}>
+    <Wrapper
+      closeOnDocumentClick={false}
+      closeOnEscape={false}
+      open={props.open}
+      position="center center"
+      modal
+    >
       <div className="cover">
         <SatelliteIcon size="50%" />
-        <span>Connection </span>
+        <span>Connection</span>
       </div>
       <form>
         <TextField
           id="filled-basic"
           label="Device Serial Code"
-          variant="filled"
+          variant="outlined"
           type="text"
         />
         <TextField
           id="filled-basic"
           label="Password"
-          variant="filled"
+          variant="outlined"
           type="password"
         />
         <Button type="submit" variant="contained">
@@ -45,11 +51,11 @@ const Wrapper = styled(Popup)`
     gap: 20px;
 
     width: 300px;
-    padding: 40px 20px;
+    padding: 30px 20px;
 
     border-radius: 5px;
 
-    background-color: ${dark.backgroundRoot};
+    background-color: ${dark.backgroundDefault};
     color: ${dark.foregroundDefault};
 
     user-select: none;
@@ -68,6 +74,7 @@ const Wrapper = styled(Popup)`
     form {
       display: flex;
       flex-direction: column;
+      gap: 20px;
     }
   }
 `;
