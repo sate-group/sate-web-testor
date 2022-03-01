@@ -1,15 +1,23 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { accountSlice } from "./features/account";
+import { configureStore, Dispatch, MiddlewareAPI } from "@reduxjs/toolkit";
+import { checkUserMiddleware } from "./features/account/account-middlewares";
+import { accountSlice } from "./features/account/account-slice";
 import deviceReducer from "./features/connection-state";
+
+// const loggingMiddleware =
+//   (_: MiddlewareAPI) => (next: Dispatch) => (action: any) => {
+//     console.log(action.type);
+//     next(action);
+//   };
 
 export const store = configureStore({
   reducer: {
     device: deviceReducer,
     account: accountSlice.reducer,
   },
+  devTools: true,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(checkUserMiddleware),
 });
 
-// Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>;
-// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = typeof store.dispatch;
