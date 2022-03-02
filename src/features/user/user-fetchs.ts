@@ -1,20 +1,20 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { Profile } from "./user-slice";
 
-
-export type GetUserProfileParams = {
+export type GetMyProfileParams = {
   accessToken: string;
 };
-export const fetchGetUserProfile = createAsyncThunk(
-  "account/fetch-get-user-profile",
-  async (params: GetUserProfileParams) => {
-    return axios
-      .get("http://localhost:3000/user/myprofile", {
-        headers: { Authorization: `Bearer ${params.accessToken}` },
-      })
-      .then((response) => {
-        return { profile: response.data };
-      });
-  }
-);
-  
+export const fetchGetMyProfile = createAsyncThunk<
+  Profile,
+  GetMyProfileParams,
+  any
+>("user/fetch-get-my-profile", async (params: GetMyProfileParams) => {
+  return axios
+    .get("http://localhost:3000/user/myprofile", {
+      headers: { Authorization: `Bearer ${params.accessToken}` },
+    })
+    .then((response) => {
+      return response.data;
+    });
+});

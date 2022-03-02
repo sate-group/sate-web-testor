@@ -6,7 +6,7 @@ export type SignInParams = {
   password: string;
 };
 export const fetchSignIn = createAsyncThunk(
-  "account/fetch-signin",
+  "auth/fetch-signin",
   async (params: SignInParams) =>
     axios
       .post("http://localhost:3000/auth/signin", params)

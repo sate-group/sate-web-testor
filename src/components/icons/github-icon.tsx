@@ -14,7 +14,7 @@ function SatelliteIcon(props: Props) {
         padding: props.padding,
         margin: props.margin,
         fill: props.color,
-        cursor: props.onClick !== undefined ? "pointer" : "none",
+        cursor: props.onClick !== undefined ? "pointer" : "",
       }}
       onClick={props.onClick}
     >

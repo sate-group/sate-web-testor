@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
 import { fetchSignIn } from "./auth-fetchs";
@@ -11,7 +10,7 @@ export const useAuth = () => {
 
   return {
     accessToken,
-    status,
+    authStatus: status,
     error,
     signIn: (emailOrUsername: string, password: string) =>
       dispatch(fetchSignIn({ emailOrUsername, password })),

@@ -3,24 +3,24 @@ import styled from "styled-components";
 import ProfileBox from "./components/profile-box";
 import SignInBox from "./components/sign-in-box";
 import { useAuth } from "./features/auth/auth-hooks";
+import { useUser } from "./features/user/user-hooks";
 
 function App() {
-  const { signIn, status, accessToken } = useAuth();
-
+  const { signIn, authStatus, accessToken } = useAuth();
+  const { myProfile, getMyProfile, userStatus, error } = useUser();
   useEffect(() => {
-    if(!accessToken) return;
-
-    
+    if (!accessToken) return;
+    getMyProfile(accessToken);
   }, [accessToken]);
 
   return (
     <Wrapper>
-      <ProfileBox status={status} />
+      <ProfileBox status={userStatus} myProfile={myProfile} />
       <SignInBox
         onSubmit={(emailOrUsername, password) =>
           signIn(emailOrUsername, password)
         }
-        status={status}
+        status={authStatus}
       />
     </Wrapper>
   );

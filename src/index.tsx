@@ -4,16 +4,16 @@ import { createGlobalStyle } from "styled-components";
 
 import { accent, dark, reset } from "react-colorset";
 import { createTheme, ThemeProvider } from "@mui/material";
-import App from "./app";
+import App from "./App";
 
 import { Provider } from "react-redux";
 import { store } from "./store";
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
-    body {
-      background-color: ${dark.backgroundRoot};
-    }
+  body {
+    background-color: ${dark.backgroundRoot};
+  }
 `;
 
 const darkTheme = createTheme({

@@ -14,21 +14,21 @@ function PlanetIcon(props: Props) {
         padding: props.padding,
         margin: props.margin,
         fill: props.color,
-        cursor: props.onClick !== undefined ? "pointer" : "none",
+        cursor: props.onClick !== undefined ? "pointer" : "",
       }}
       onClick={props.onClick}
     >
       <svg
         id="Capa_1"
-        enable-background="new 0 0 510 510"
+        enableBackground="new 0 0 510 510"
         viewBox="0 0 510 510"
         xmlns="http://www.w3.org/2000/svg"
         xmlnsXlink="http://www.w3.org/1999/xlink"
       >
         <linearGradient id="lg1">
-          <stop offset="0" stop-color="#60b7ff" />
-          <stop offset=".5857" stop-color="#0182fc" />
-          <stop offset="1" stop-color="#2740b0" />
+          <stop offset="0" stopColor="#60b7ff" />
+          <stop offset=".5857" stopColor="#0182fc" />
+          <stop offset="1" stopColor="#2740b0" />
         </linearGradient>
         <linearGradient
           id="SVGID_1_"

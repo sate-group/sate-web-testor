@@ -1,13 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { fetchGetMyProfile } from "./user-fetchs";
 
 export type Profile = {
   id: string;
   email: string;
   username: string;
   isEmailVerified: boolean;
-  displayName: string;
-  mention: string;
-  photoUrl: string;
+  mention: string | undefined;
+  photoUrl: string | undefined;
 };
 type State = {
   myProfile?: Profile;
@@ -26,11 +26,29 @@ const initialState: State = {
   status: "idle",
 };
 
-export const authSlice = createSlice({
+export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {},
-  extraReducers: (builder) => {},
+  extraReducers: (builder) => {
+    builder.addCase(fetchGetMyProfile.pending, (state) => {
+      state.status = "pending";
+    });
+    builder.addCase(
+      fetchGetMyProfile.fulfilled,
+      (state, action: PayloadAction<Profile>) => {
+        state.status = "succeeded";
+
+        const myProfile = action.payload;
+        state.myProfile = myProfile;
+      }
+    );
+    builder.addCase(fetchGetMyProfile.rejected, (state, action) => {
+      state.status = "failed";
+
+      console.log("Rejected in fetchGetMyProfile function", action.payload);
+    });
+  },
 });
 
-export const {} = authSlice.actions;
+export const {} = userSlice.actions;
