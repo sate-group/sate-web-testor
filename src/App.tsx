@@ -1,22 +1,21 @@
 import { useEffect } from "react";
 import styled from "styled-components";
+import ProfileBox from "./components/profile-box";
 import SignInBox from "./components/sign-in-box";
-import { useAccount, useSignIn } from "./features/account/account-hooks";
+import { useAuth } from "./features/auth/auth-hooks";
 
 function App() {
-  const { signIn } = useSignIn();
-  const { profile, accessToken, status, getUserProfile } = useAccount();
-  useEffect(() => {
-    if (!accessToken) return;
-    console.log("accessToken is", accessToken);
-    getUserProfile(accessToken);
-  }, [accessToken]);
+  const { signIn, status, accessToken } = useAuth();
 
   useEffect(() => {
-    console.log(profile);
-  }, [profile]);
+    if(!accessToken) return;
+
+    
+  }, [accessToken]);
+
   return (
     <Wrapper>
+      <ProfileBox status={status} />
       <SignInBox
         onSubmit={(emailOrUsername, password) =>
           signIn(emailOrUsername, password)

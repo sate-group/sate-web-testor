@@ -11,6 +11,8 @@ export const Box = styled.div`
   background-color: ${dark.backgroundDefault};
   color: ${dark.foregroundDefault};
 
+  padding: 20px;
+
   @keyframes pulse {
     0% {
       box-shadow: 0 0 0 0 ${accent.accentPrimaryDefault};

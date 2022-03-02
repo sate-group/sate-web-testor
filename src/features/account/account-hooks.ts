@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
-import { fetchGetUserProfile, fetchSignIn } from "./account-fetchs";
+import { fetchSignIn } from "../auth/auth-fetchs";
+import { fetchGetUserProfile } from "./account-fetchs";
 
 export const useAccount = () => {
   const dispatch = useDispatch();

@@ -1,7 +1,7 @@
 import { configureStore, Dispatch, MiddlewareAPI } from "@reduxjs/toolkit";
 import { checkUserMiddleware } from "./features/account/account-middlewares";
 import { accountSlice } from "./features/account/account-slice";
-import deviceReducer from "./features/connection-state";
+import { authSlice } from "./features/auth/auth-slice";
 
 // const loggingMiddleware =
 //   (_: MiddlewareAPI) => (next: Dispatch) => (action: any) => {
@@ -11,8 +11,8 @@ import deviceReducer from "./features/connection-state";
 
 export const store = configureStore({
   reducer: {
-    device: deviceReducer,
     account: accountSlice.reducer,
+    auth: authSlice.reducer,
   },
   devTools: true,
   middleware: (getDefaultMiddleware) =>

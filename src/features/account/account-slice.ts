@@ -1,14 +1,16 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { fetchGetUserProfile, fetchSignIn } from "./account-fetchs";
+import { conformsTo } from "lodash";
+import { fetchGetUserProfile } from "./account-fetchs";
 
 export type Profile = {
   userId: string;
   email: string;
   username: string;
   isEmailVerified: boolean;
-  displayName: string;
-  mention: string;
-  photoUrl: string;
+
+  // optional
+  mention: string | undefined;
+  photoUrl: string | undefined;
 };
 type State = {
   value: {
@@ -36,39 +38,19 @@ export const accountSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchSignIn.pending, (state) => {});
-    builder.addCase(
-      fetchSignIn.fulfilled,
-      (state, action: PayloadAction<{ accessToken: string }>) => {
-        const accessToken = action.payload.accessToken;
-        state.value = {
-          ...state.value,
-          accessToken,
-        };
-      }
-    );
-    builder.addCase(fetchSignIn.rejected, (state, action) => {
-      console.log(action.payload);
-    });
-    builder.addCase(fetchGetUserProfile.pending, (state) => {
-      state.status = "pending";
-    });
+    
+    builder.addCase(fetchGetUserProfile.pending, (state) => {});
     builder.addCase(
       fetchGetUserProfile.fulfilled,
       (state, action: PayloadAction<{ profile: Profile }>) => {
         const profile = action.payload.profile;
-        state.status = "succeeded";
         state.value.profile = profile;
       }
     );
     builder.addCase(fetchGetUserProfile.rejected, (state, action) => {
-      state.status = "failed";
-
       console.log(action.payload);
     });
   },
 });
 
 export const {} = accountSlice.actions;
-
-export default accountSlice.reducer;

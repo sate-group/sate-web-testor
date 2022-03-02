@@ -49,6 +49,8 @@ function SignInBox({ onSubmit, status }: Props) {
    */
   const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (status === "pending") return;
+
     onSubmit(form.emailOrUsername, form.password);
     resetForm();
   };
@@ -120,9 +122,6 @@ const Wrapper = styled(Box)`
   display: flex;
   flex-direction: column;
   gap: 30px;
-
-  padding: 20px 20px;
-
   .cover {
     width: 100%;
     display: flex;
