@@ -7,7 +7,6 @@ import ReactLoading from "react-loading";
 import AngleDownIcon from "../icons/angle-down-icon";
 import { useState } from "react";
 import AngleUpIcon from "../icons/angle-up-icon";
-import { produceWithPatches } from "immer";
 
 type Props = {
   myProfile?: Profile;

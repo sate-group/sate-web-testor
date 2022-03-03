@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { fetchSignIn } from "./auth-fetchs";
+import * as cookie from "react-cookie";
 
 type State = {
   accessToken?: string;
