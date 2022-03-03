@@ -1,6 +1,5 @@
 import { dark } from "react-colorset";
 import styled from "styled-components";
-import { Profile } from "../../features/user/user-slice";
 import { Box } from "../box";
 import PlanetIcon from "../icons/planet-icon";
 import ReactLoading from "react-loading";
@@ -9,7 +8,7 @@ import { useState } from "react";
 import AngleUpIcon from "../icons/angle-up-icon";
 
 type Props = {
-  myProfile?: Profile;
+  myProfile?: any;
   status: "idle" | "pending" | "succeeded" | "failed";
 };
 function ProfileBox({ myProfile, status }: Props) {

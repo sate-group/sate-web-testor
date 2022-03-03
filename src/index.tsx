@@ -6,10 +6,6 @@ import { accent, dark, reset } from "react-colorset";
 import { createTheme, ThemeProvider } from "@mui/material";
 import App from "./App";
 
-import { Provider } from "react-redux";
-import { store } from "./store";
-import { CookiesProvider } from "react-cookie";
-
 const GlobalStyle = createGlobalStyle`
   ${reset}
   body {
@@ -29,10 +25,8 @@ const darkTheme = createTheme({
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={darkTheme}>
-      <Provider store={store}>
-        <GlobalStyle />
-        <App />
-      </Provider>
+      <GlobalStyle />
+      <App />
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById("root")
