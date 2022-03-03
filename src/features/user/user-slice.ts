@@ -36,10 +36,10 @@ export const userSlice = createSlice({
     });
     builder.addCase(
       fetchGetMyProfile.fulfilled,
-      (state, action: PayloadAction<Profile>) => {
+      (state, action: PayloadAction<{ myProfile: Profile }>) => {
         state.status = "succeeded";
 
-        const myProfile = action.payload;
+        const myProfile = action.payload.myProfile;
         state.myProfile = myProfile;
       }
     );

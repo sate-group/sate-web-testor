@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { fetchSignIn } from "./auth-fetchs";
+import { fetchCheckAuth, fetchSignIn } from "./auth-fetchs";
 import * as cookie from "react-cookie";
+import { WritableDraft } from "immer/dist/internal";
 
 type State = {
   accessToken?: string;
@@ -37,6 +38,17 @@ export const authSlice = createSlice({
       }
     );
     builder.addCase(fetchSignIn.rejected, (state, action) => {
+      state.status = "failed";
+
+      console.log("Rejected in fetchSignIn function", action.payload);
+    });
+    builder.addCase(fetchCheckAuth.pending, (state) => {
+      state.status = "pending";
+    });
+    builder.addCase(fetchCheckAuth.fulfilled, (state) => {
+      state.status = "succeeded";
+    });
+    builder.addCase(fetchCheckAuth.rejected, (state, action) => {
       state.status = "failed";
 
       console.log("Rejected in fetchSignIn function", action.payload);

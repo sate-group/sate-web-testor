@@ -1,16 +1,14 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useLayoutEffect, useMemo } from "react";
 import { useCookies } from "react-cookie";
 import styled from "styled-components";
 import ProfileBox from "./components/profile-box";
 import SignInBox from "./components/sign-in-box";
 import { useAuth } from "./features/auth/auth-hooks";
 import { useUser } from "./features/user/user-hooks";
-import Cookies from "js-cookie";
 import { dark } from "react-colorset";
 
 function App() {
   const [cookies, setCookies] = useCookies(["accessToken"]);
-  const accessTokenCookie = useMemo(() => cookies.accessToken, [cookies]);
 
   const { signIn, authStatus, accessToken } = useAuth();
   const { myProfile, getMyProfile, userStatus, error } = useUser();
@@ -24,11 +22,13 @@ function App() {
       path: "/",
       sameSite: true,
     });
+    console.log(accessToken); 
   }, [accessToken]);
 
   useEffect(() => {
-    console.timeLog("cookies.accessToken", cookies["accessToken"]);
-  }, [cookies["accessToken"]]);
+    if(!cookies.accessToken) return;
+
+  }, []);
 
   return (
     <Wrapper>
@@ -39,7 +39,6 @@ function App() {
         }
         status={authStatus}
       />
-      {accessTokenCookie}
     </Wrapper>
   );
 }
