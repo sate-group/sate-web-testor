@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { Box } from "../box";
 import SatelliteIcon from "../icons/satellite-icon";
 import ReactLoading from "react-loading";
+import { Status } from "../../App";
 
 const useForm = () => {
   type Form = {
@@ -31,7 +32,7 @@ const useForm = () => {
 };
 type Props = {
   onSubmit: (emailOrUsername: string, password: string) => void;
-  status: "idle" | "pending" | "succeeded" | "failed";
+  status: Status;
 };
 function SignInBox({ onSubmit, status }: Props) {
   /**
@@ -48,7 +49,7 @@ function SignInBox({ onSubmit, status }: Props) {
    */
   const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (status === "pending") return;
+    if (status === "loading") return;
 
     onSubmit(form.emailOrUsername, form.password);
     resetForm();
@@ -65,7 +66,7 @@ function SignInBox({ onSubmit, status }: Props) {
   };
 
   return (
-    <div hidden={status === "succeeded"}>
+    <div hidden={status === "success"}>
       <Wrapper>
         <div className="cover">
           <SatelliteIcon size="70%" />
@@ -81,7 +82,7 @@ function SignInBox({ onSubmit, status }: Props) {
             name="emailOrUsername"
             value={form.emailOrUsername}
             onChange={changeHandler}
-            disabled={status === "pending"}
+            disabled={status === "loading"}
           />
           <TextField
             size="small"
@@ -92,15 +93,15 @@ function SignInBox({ onSubmit, status }: Props) {
             name="password"
             value={form.password}
             onChange={changeHandler}
-            disabled={status === "pending"}
+            disabled={status === "loading"}
           />
           <Button
             size="small"
             type="submit"
             variant="contained"
-            disabled={status === "pending"}
+            disabled={status === "loading"}
           >
-            {status === "pending" ? (
+            {status === "loading" ? (
               <ReactLoading
                 width="20px"
                 height="20px"
