@@ -7,6 +7,7 @@ import AngleDownIcon from "../icons/angle-down-icon";
 import { useState } from "react";
 import AngleUpIcon from "../icons/angle-up-icon";
 import { Status } from "../../App";
+import { BookAltIcon } from "../icons/book-alt-icon";
 
 type Props = {
   myProfile?: any;
@@ -40,6 +41,7 @@ function ProfileBox({ myProfile, status }: Props) {
           <Detail hidden={!showDetail}>
             <span>{myProfile?.email}</span>
             <span>{myProfile?.mention}</span>
+            <BookAltIcon size="20px" color={dark.foregroundDimmer} />
           </Detail>
         </Wrapper>
       );

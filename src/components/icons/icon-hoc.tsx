@@ -1,18 +1,34 @@
-import React from "react";
+import React, { Component } from "react";
 
-function withIcon<T>(WrappedComponent: React.ComponentType<T>) {
-  return class extends React.Component {
-    componentWillReceiveProps(
-      nextProps: React.ComponentProps<typeof WrappedComponent>
-    ) {
-      console.log("Current props: ", this.props);
-      console.log("Next props: ", nextProps);
-    }
-    render() {
-      // Wraps the input component in a container, without mutating it. Good!
-      return <WrappedComponent {...(this.props as T)} />;
-    }
-  };
+interface WithIconProps {
+  size: string;
+  color?: string;
+  padding?: string;
+  margin?: string;
+  onClick?: () => void;
 }
 
-export default withIcon;
+const widhIcon = <P extends object>(Component: React.ComponentType<P>) => {
+  return class extends React.Component<P & WithIconProps> {
+    render() {
+      const { ...props } = this.props;
+      return (
+        <div
+          style={{
+            width: props.size,
+            height: props.size,
+            padding: props.padding,
+            margin: props.margin,
+            fill: props.color,
+            cursor: props.onClick !== undefined ? "pointer" : "",
+          }}
+          onClick={props.onClick}
+        >
+          <Component {...(props as P)} />
+        </div>
+      );
+    }
+  };
+};
+
+export default widhIcon;
