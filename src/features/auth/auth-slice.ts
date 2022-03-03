@@ -1,7 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { fetchCheckAuth, fetchSignIn } from "./auth-fetchs";
-import * as cookie from "react-cookie";
-import { WritableDraft } from "immer/dist/internal";
 
 type State = {
   accessToken?: string;
@@ -25,6 +23,9 @@ export const authSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+    /**
+     * fetchSignIn
+     */
     builder.addCase(fetchSignIn.pending, (state) => {
       state.status = "pending";
     });
@@ -37,21 +38,27 @@ export const authSlice = createSlice({
         state.accessToken = accessToken;
       }
     );
-    builder.addCase(fetchSignIn.rejected, (state, action) => {
+    builder.addCase(fetchSignIn.rejected, (state) => {
       state.status = "failed";
-
-      console.log("Rejected in fetchSignIn function", action.payload);
     });
+    /**
+     * fetchCheckAuth
+     */
     builder.addCase(fetchCheckAuth.pending, (state) => {
       state.status = "pending";
     });
-    builder.addCase(fetchCheckAuth.fulfilled, (state) => {
-      state.status = "succeeded";
-    });
+    builder.addCase(
+      fetchCheckAuth.fulfilled,
+      (state, action: PayloadAction<{ accessToken: string }>) => {
+        state.status = "succeeded";
+
+        const accessToken = action.payload.accessToken;
+        state.accessToken = accessToken;
+      }
+    );
     builder.addCase(fetchCheckAuth.rejected, (state, action) => {
       state.status = "failed";
-
-      console.log("Rejected in fetchSignIn function", action.payload);
+      console.log(action);
     });
   },
 });

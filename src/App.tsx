@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useMemo } from "react";
+import React, { useEffect, useLayoutEffect, useMemo } from "react";
 import { useCookies } from "react-cookie";
 import styled from "styled-components";
 import ProfileBox from "./components/profile-box";
@@ -10,7 +10,7 @@ import { dark } from "react-colorset";
 function App() {
   const [cookies, setCookies] = useCookies(["accessToken"]);
 
-  const { signIn, authStatus, accessToken } = useAuth();
+  const { signIn, checkAuth, authStatus, accessToken } = useAuth();
   const { myProfile, getMyProfile, userStatus, error } = useUser();
 
   useEffect(() => {
@@ -22,12 +22,13 @@ function App() {
       path: "/",
       sameSite: true,
     });
-    console.log(accessToken); 
+    console.log(accessToken);
   }, [accessToken]);
 
   useEffect(() => {
-    if(!cookies.accessToken) return;
+    if (!cookies.accessToken) return;
 
+    checkAuth(cookies.accessToken);
   }, []);
 
   return (
