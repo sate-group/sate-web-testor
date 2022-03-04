@@ -133,6 +133,7 @@ function App() {
   return (
     <Wrapper>
       <ProfileBox
+        componentId="profile-box"
         status={convertStatus(
           userStatus === "success",
           userStatus === "loading",
@@ -142,6 +143,7 @@ function App() {
         onSignOut={signOut}
       />
       <SignInBox
+        componentId="sign-in-box"
         status={convertStatus(
           authStatus === "idle",
           authStatus === "loading",

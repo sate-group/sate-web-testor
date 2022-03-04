@@ -30,9 +30,10 @@ const useForm = () => {
   };
 };
 type Props = {
+  componentId: string;
   onSubmit: (emailOrUsername: string, password: string) => void;
 };
-function SignInBox({ onSubmit }: Props) {
+function SignInBox({ componentId, onSubmit }: Props) {
   /**
    * states
    */
@@ -62,7 +63,7 @@ function SignInBox({ onSubmit }: Props) {
   };
 
   return (
-    <Wrapper>
+    <Wrapper id={componentId}>
       <div className="cover">
         <SatelliteIcon title="" size="70%" />
         <span>Sign in to Sate</span>

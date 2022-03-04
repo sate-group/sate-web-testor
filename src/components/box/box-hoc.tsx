@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useLayoutEffect, useRef } from "react";
 import { accent, dark } from "react-colorset";
 import styled from "styled-components";
 import ReactLoading from "react-loading";
+import { HighlightSpanKind } from "typescript";
 
 export type BoxStatus = "show" | "loading" | "hide" | undefined;
 export function convertStatus(
@@ -16,14 +17,16 @@ export function convertStatus(
   return;
 }
 interface WithIconProps {
+  componentId: string;
   status: BoxStatus;
 }
 
 export function withBox<P extends object>(Component: React.ComponentType<P>) {
-  return class extends React.Component<P & WithIconProps> {
+  return class WithBox extends React.Component<P & WithIconProps> {
+    componentDidMount() {}
+
     render() {
       const { status } = this.props;
-      
       switch (status) {
         case "show":
           return (

@@ -10,15 +10,18 @@ import {
   UserIcon,
 } from "../icons";
 import { withBox } from "../box";
+import { useEffect } from "react";
 
 type Props = {
+  componentId: string;
+
   myProfile?: Profile;
 
   onSignOut: () => void;
 };
-function ProfileBox({ myProfile, onSignOut }: Props) {
+function ProfileBox({ componentId, myProfile, onSignOut }: Props) {
   return (
-    <Wrapper>
+    <Wrapper id={componentId}>
       {myProfile?.photoUrl || <PlanetIcon title="" size="70px" />}
       <div className="detail">
         Signed in as <span>{myProfile?.username}</span>
@@ -73,7 +76,6 @@ const Wrapper = styled.div`
 
   font-size: 14px;
   color: ${dark.foregroundDimmer};
-
 
   .detail {
     display: flex;
