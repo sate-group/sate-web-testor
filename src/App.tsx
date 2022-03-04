@@ -5,6 +5,7 @@ import SignInBox from "./components/sign-in-box";
 import { dark } from "react-colorset";
 import axios from "axios";
 import { useCookies } from "react-cookie";
+import { convertStatus } from "./components/box";
 
 export type Status = "success" | "error" | "loading" | "idle";
 export type Profile = {
@@ -132,11 +133,22 @@ function App() {
   return (
     <Wrapper>
       <ProfileBox
-        status={userStatus}
+        status={convertStatus(
+          userStatus === "success",
+          userStatus === "loading",
+          userStatus === "idle"
+        )}
         myProfile={myProfile}
         onSignOut={signOut}
       />
-      <SignInBox onSubmit={signIn} status={authStatus} />
+      <SignInBox
+        status={convertStatus(
+          authStatus === "idle",
+          authStatus === "loading",
+          authStatus === "success"
+        )}
+        onSubmit={signIn}
+      />
     </Wrapper>
   );
 }

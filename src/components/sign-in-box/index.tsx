@@ -1,10 +1,9 @@
 import { Button, TextField } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import ReactLoading from "react-loading";
 import { Status } from "../../App";
+import { withBox } from "../box";
 import { SatelliteIcon } from "../icons";
-import withBox from "../box/box-hoc";
 
 const useForm = () => {
   type Form = {
@@ -32,9 +31,8 @@ const useForm = () => {
 };
 type Props = {
   onSubmit: (emailOrUsername: string, password: string) => void;
-  status: Status;
 };
-function SignInBox({ onSubmit, status }: Props) {
+function SignInBox({ onSubmit }: Props) {
   /**
    * states
    */
@@ -49,8 +47,6 @@ function SignInBox({ onSubmit, status }: Props) {
    */
   const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (status === "loading") return;
-
     onSubmit(form.emailOrUsername, form.password);
     resetForm();
   };
@@ -66,55 +62,37 @@ function SignInBox({ onSubmit, status }: Props) {
   };
 
   return (
-    <div hidden={status === "success"}>
-      <Wrapper>
-        <div className="cover">
-          <SatelliteIcon title="" size="70%" />
-          <span>Sign in to Sate</span>
-        </div>
-        <form onSubmit={submitHandler}>
-          <TextField
-            size="small"
-            id="filled-basic"
-            label="Email of username"
-            variant="outlined"
-            type="text"
-            name="emailOrUsername"
-            value={form.emailOrUsername}
-            onChange={changeHandler}
-            disabled={status === "loading"}
-          />
-          <TextField
-            size="small"
-            id="filled-basic"
-            label="Password"
-            variant="outlined"
-            type="password"
-            name="password"
-            value={form.password}
-            onChange={changeHandler}
-            disabled={status === "loading"}
-          />
-          <Button
-            size="small"
-            type="submit"
-            variant="contained"
-            disabled={status === "loading"}
-          >
-            {status === "loading" ? (
-              <ReactLoading
-                width="20px"
-                height="20px"
-                type="spin"
-                color="#fff"
-              />
-            ) : (
-              <span>CONFIRM</span>
-            )}
-          </Button>
-        </form>
-      </Wrapper>
-    </div>
+    <Wrapper>
+      <div className="cover">
+        <SatelliteIcon title="" size="70%" />
+        <span>Sign in to Sate</span>
+      </div>
+      <form onSubmit={submitHandler}>
+        <TextField
+          size="small"
+          id="filled-basic"
+          label="Email of username"
+          variant="outlined"
+          type="text"
+          name="emailOrUsername"
+          value={form.emailOrUsername}
+          onChange={changeHandler}
+        />
+        <TextField
+          size="small"
+          id="filled-basic"
+          label="Password"
+          variant="outlined"
+          type="password"
+          name="password"
+          value={form.password}
+          onChange={changeHandler}
+        />
+        <Button size="small" type="submit" variant="contained">
+          CONFIRM
+        </Button>
+      </form>
+    </Wrapper>
   );
 }
 
@@ -122,6 +100,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 30px;
+
   .cover {
     width: 100%;
     display: flex;

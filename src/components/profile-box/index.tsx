@@ -1,7 +1,5 @@
 import { dark } from "react-colorset";
 import styled from "styled-components";
-import ReactLoading from "react-loading";
-import { useState } from "react";
 import { Profile, Status } from "../../App";
 import {
   BookAltIcon,
@@ -11,70 +9,59 @@ import {
   SignOutIcon,
   UserIcon,
 } from "../icons";
-import withBox from "../box/box-hoc";
+import { withBox } from "../box";
 
 type Props = {
   myProfile?: Profile;
-  status: Status;
+
   onSignOut: () => void;
 };
-function ProfileBox({ myProfile, status, onSignOut }: Props) {
-  switch (status) {
-    case "success":
-      return (
-        <Wrapper>
-          {myProfile?.photoUrl || <PlanetIcon title="" size="70px" />}
-          <div className="detail">
-            Signed in as <span>{myProfile?.username}</span>
-            <div className="features">
-              <UserIcon
-                active
-                hover
-                title="my profile"
-                size="15px"
-                onClick={() => console.log("")}
-              />
-              <BookAltIcon
-                active
-                hover
-                title="guide"
-                size="15px"
-                onClick={() => console.log("")}
-              />
-              <NotificationIcon
-                active
-                hover
-                title="notifications"
-                size="15px"
-                onClick={() => console.log("")}
-              />
-              <SettingsIcon
-                active
-                hover
-                title="settings"
-                size="15px"
-                onClick={() => console.log("")}
-              />
-              <SignOutIcon
-                active
-                hover
-                title="sign out"
-                size="15px"
-                onClick={onSignOut}
-              />
-            </div>
-          </div>
-        </Wrapper>
-      );
-    case "loading":
-      return (
-        <Wrapper>
-          <ReactLoading width="30px" height="30px" type="spin" />
-        </Wrapper>
-      );
-    default:
-      return <></>;
-  }
+function ProfileBox({ myProfile, onSignOut }: Props) {
+  return (
+    <Wrapper>
+      {myProfile?.photoUrl || <PlanetIcon title="" size="70px" />}
+      <div className="detail">
+        Signed in as <span>{myProfile?.username}</span>
+        <div className="features">
+          <UserIcon
+            active
+            hover
+            title="my profile"
+            size="15px"
+            onClick={() => console.log("")}
+          />
+          <BookAltIcon
+            active
+            hover
+            title="guide"
+            size="15px"
+            onClick={() => console.log("")}
+          />
+          <NotificationIcon
+            active
+            hover
+            title="notifications"
+            size="15px"
+            onClick={() => console.log("")}
+          />
+          <SettingsIcon
+            active
+            hover
+            title="settings"
+            size="15px"
+            onClick={() => console.log("")}
+          />
+          <SignOutIcon
+            active
+            hover
+            title="sign out"
+            size="15px"
+            onClick={onSignOut}
+          />
+        </div>
+      </div>
+    </Wrapper>
+  );
 }
 
 const Wrapper = styled.div`
@@ -87,7 +74,6 @@ const Wrapper = styled.div`
   font-size: 14px;
   color: ${dark.foregroundDimmer};
 
-  padding: 20px;
 
   .detail {
     display: flex;
