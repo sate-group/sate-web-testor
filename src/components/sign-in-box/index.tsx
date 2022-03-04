@@ -1,10 +1,10 @@
 import { Button, TextField } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { Box } from "../box";
 import ReactLoading from "react-loading";
 import { Status } from "../../App";
 import { SatelliteIcon } from "../icons";
+import withBox from "../box/box-hoc";
 
 const useForm = () => {
   type Form = {
@@ -69,7 +69,7 @@ function SignInBox({ onSubmit, status }: Props) {
     <div hidden={status === "success"}>
       <Wrapper>
         <div className="cover">
-          <SatelliteIcon size="70%" />
+          <SatelliteIcon title="" size="70%" />
           <span>Sign in to Sate</span>
         </div>
         <form onSubmit={submitHandler}>
@@ -118,7 +118,7 @@ function SignInBox({ onSubmit, status }: Props) {
   );
 }
 
-const Wrapper = styled(Box)`
+const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 30px;
@@ -142,4 +142,4 @@ const Wrapper = styled(Box)`
   }
 `;
 
-export default SignInBox;
+export default withBox(SignInBox);

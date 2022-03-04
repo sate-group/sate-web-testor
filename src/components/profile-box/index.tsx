@@ -1,10 +1,17 @@
 import { dark } from "react-colorset";
 import styled from "styled-components";
-import { Box } from "../box";
 import ReactLoading from "react-loading";
 import { useState } from "react";
 import { Profile, Status } from "../../App";
-import { BookAltIcon, PlanetIcon, SettingsIcon, SignOutIcon } from "../icons";
+import {
+  BookAltIcon,
+  NotificationIcon,
+  PlanetIcon,
+  SettingsIcon,
+  SignOutIcon,
+  UserIcon,
+} from "../icons";
+import withBox from "../box/box-hoc";
 
 type Props = {
   myProfile?: Profile;
@@ -12,29 +19,47 @@ type Props = {
   onSignOut: () => void;
 };
 function ProfileBox({ myProfile, status, onSignOut }: Props) {
-  const [showDetail, setShowDetail] = useState<boolean>(false);
-
   switch (status) {
     case "success":
       return (
         <Wrapper>
-          {myProfile?.photoUrl || <PlanetIcon size="70px" />}
+          {myProfile?.photoUrl || <PlanetIcon title="" size="70px" />}
           <div className="detail">
             Signed in as <span>{myProfile?.username}</span>
             <div className="features">
+              <UserIcon
+                active
+                hover
+                title="my profile"
+                size="15px"
+                onClick={() => console.log("")}
+              />
               <BookAltIcon
-                size="17px"
-                color={dark.foregroundDimmer}
+                active
+                hover
+                title="guide"
+                size="15px"
+                onClick={() => console.log("")}
+              />
+              <NotificationIcon
+                active
+                hover
+                title="notifications"
+                size="15px"
                 onClick={() => console.log("")}
               />
               <SettingsIcon
-                size="17px"
-                color={dark.foregroundDimmer}
+                active
+                hover
+                title="settings"
+                size="15px"
                 onClick={() => console.log("")}
               />
               <SignOutIcon
-                size="17px"
-                color={dark.foregroundDimmer}
+                active
+                hover
+                title="sign out"
+                size="15px"
                 onClick={onSignOut}
               />
             </div>
@@ -44,12 +69,7 @@ function ProfileBox({ myProfile, status, onSignOut }: Props) {
     case "loading":
       return (
         <Wrapper>
-          <ReactLoading
-            width="30px"
-            height="30px"
-            type="spin"
-            color={dark.foregroundDimmer}
-          />
+          <ReactLoading width="30px" height="30px" type="spin" />
         </Wrapper>
       );
     default:
@@ -57,7 +77,7 @@ function ProfileBox({ myProfile, status, onSignOut }: Props) {
   }
 }
 
-const Wrapper = styled(Box)`
+const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -78,11 +98,13 @@ const Wrapper = styled(Box)`
     width: 100%;
     display: flex;
     margin-top: 10px;
-    gap: 10px;
+
+    position: relative;
+    right: 5px;
   }
 
   span {
     font-size: 23px;
   }
 `;
-export default ProfileBox;
+export default withBox(ProfileBox);

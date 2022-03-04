@@ -6,3 +6,5 @@ export * from "./planet-icon";
 export * from "./satellite-icon";
 export * from "./sign-out-icon";
 export * from "./settings-icon";
+export * from "./user-icon";
+export * from "./notification-icon";
