@@ -2,9 +2,9 @@ import { Button, TextField } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { Box } from "../box";
-import SatelliteIcon from "../icons/satellite-icon";
 import ReactLoading from "react-loading";
 import { Status } from "../../App";
+import { SatelliteIcon } from "../icons";
 
 const useForm = () => {
   type Form = {

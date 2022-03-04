@@ -1,14 +1,8 @@
-type Props = {
-  size: string;
-};
-function SatelliteIcon(props: Props) {
+import withIcon from "./icon-hoc";
+
+function Icon() {
   return (
-    <svg
-      width={props.size}
-      height={props.size}
-      viewBox="-5 1 511 511.99966"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg viewBox="-5 1 511 511.99966" xmlns="http://www.w3.org/2000/svg">
       <path
         d="m245.5 22c-135.308594 0-245 109.6875-245 245 0 78.3125 36.742188 148.039062 93.929688 192.890625l19.75 13.96875c30.035156 19.105469 64.511718 31.847656 101.535156 36.335937l24.980468 1.742188c1.597657.03125 3.199219.0625 4.804688.0625 11.335938 0 22.492188-.789062 33.417969-2.277344l24.851562-4.714844c107.175781-26.148437 186.730469-122.777343 186.730469-238.007812 0-135.3125-109.691406-245-245-245zm0 0"
         fill="#162680"
@@ -133,4 +127,4 @@ function SatelliteIcon(props: Props) {
   );
 }
 
-export default SatelliteIcon;
+export const SatelliteIcon = withIcon(Icon);

@@ -1,48 +1,44 @@
 import { dark } from "react-colorset";
 import styled from "styled-components";
 import { Box } from "../box";
-import PlanetIcon from "../icons/planet-icon";
 import ReactLoading from "react-loading";
-import AngleDownIcon from "../icons/angle-down-icon";
 import { useState } from "react";
-import AngleUpIcon from "../icons/angle-up-icon";
-import { Status } from "../../App";
-import { BookAltIcon } from "../icons/book-alt-icon";
+import { Profile, Status } from "../../App";
+import { BookAltIcon, PlanetIcon, SettingsIcon, SignOutIcon } from "../icons";
 
 type Props = {
-  myProfile?: any;
+  myProfile?: Profile;
   status: Status;
   onSignOut: () => void;
 };
-function ProfileBox({ myProfile, status }: Props) {
+function ProfileBox({ myProfile, status, onSignOut }: Props) {
   const [showDetail, setShowDetail] = useState<boolean>(false);
 
   switch (status) {
     case "success":
       return (
         <Wrapper>
-          <Header>
-            {myProfile?.photoUrl || <PlanetIcon size="30px" />}
-            <span>{myProfile?.username}</span>
-            {showDetail ? (
-              <AngleUpIcon
-                size="15px"
+          {myProfile?.photoUrl || <PlanetIcon size="70px" />}
+          <div className="detail">
+            Signed in as <span>{myProfile?.username}</span>
+            <div className="features">
+              <BookAltIcon
+                size="17px"
                 color={dark.foregroundDimmer}
-                onClick={() => setShowDetail(!showDetail)}
+                onClick={() => console.log("")}
               />
-            ) : (
-              <AngleDownIcon
-                size="15px"
+              <SettingsIcon
+                size="17px"
                 color={dark.foregroundDimmer}
-                onClick={() => setShowDetail(!showDetail)}
+                onClick={() => console.log("")}
               />
-            )}
-          </Header>
-          <Detail hidden={!showDetail}>
-            <span>{myProfile?.email}</span>
-            <span>{myProfile?.mention}</span>
-            <BookAltIcon size="20px" color={dark.foregroundDimmer} />
-          </Detail>
+              <SignOutIcon
+                size="17px"
+                color={dark.foregroundDimmer}
+                onClick={onSignOut}
+              />
+            </div>
+          </div>
         </Wrapper>
       );
     case "loading":
@@ -64,25 +60,29 @@ function ProfileBox({ myProfile, status }: Props) {
 const Wrapper = styled(Box)`
   display: flex;
   flex-direction: column;
-  color: ${dark.foregroundDimmer};
-  gap: 20px;
-`;
-
-const Header = styled.div`
-  display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 10px;
-  font-size: 20px;
+  gap: 20px;
+
+  font-size: 14px;
+  color: ${dark.foregroundDimmer};
+
+  padding: 20px;
+
+  .detail {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .features {
+    width: 100%;
+    display: flex;
+    margin-top: 10px;
+    gap: 10px;
+  }
 
   span {
-    flex-grow: 1;
-    text-align: left;
-    position: relative;
+    font-size: 23px;
   }
-`;
-
-const Detail = styled.div`
-  font-size: 15px;
 `;
 export default ProfileBox;

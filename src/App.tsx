@@ -4,7 +4,6 @@ import ProfileBox from "./components/profile-box";
 import SignInBox from "./components/sign-in-box";
 import { dark } from "react-colorset";
 import axios from "axios";
-import { useQuery } from "react-query";
 import { useCookies } from "react-cookie";
 
 export type Status = "success" | "error" | "loading" | "idle";

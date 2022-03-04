@@ -2,7 +2,7 @@ import { Button, TextField } from "@mui/material";
 import { dark } from "react-colorset";
 import Popup from "reactjs-popup";
 import styled from "styled-components";
-import SatelliteIcon from "../icons/satellite-icon";
+import { SatelliteIcon } from "../icons";
 
 type Props = {
   open: boolean;
